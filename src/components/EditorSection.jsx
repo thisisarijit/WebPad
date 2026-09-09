@@ -12,7 +12,7 @@ const EditorSection = () => {
 
   return (
     <div
-      className={`grid h-screen w-screen gap-1 p-1 ${
+      className={`grid h-full w-full gap-1 ${
         isSidebarOpen ? "grid-cols-[1fr_5fr]" : "grid-cols-[48px_minmax(0,1fr)]"
       }`}
     >
