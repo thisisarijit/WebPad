@@ -3,8 +3,19 @@ import { PanelLeftOpen } from "lucide-react";
 import LeftSideBar from "./LeftSideBar";
 import CodeAndOutput from "./CodeAndOutput";
 
+const initialFiles = [
+  {
+    id: crypto.randomUUID(),
+    name: "index.html",
+    language: "html",
+    content: "<!DOCTYPE html>\n<html></html>",
+  },
+];
+
 const EditorSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [files, setFiles] = useState(initialFiles);
+  const [activeFileId, setActiveFileId] = useState(initialFiles);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -17,7 +28,13 @@ const EditorSection = () => {
       }`}
     >
       {isSidebarOpen ? (
-        <LeftSideBar onToggle={toggleSidebar} />
+        <LeftSideBar
+          onToggle={toggleSidebar}
+          files={files}
+          setFiles={setFiles}
+          activeFileId={activeFileId}
+          setActiveFileId={setActiveFileId}
+        />
       ) : (
         <button
           type="button"
@@ -28,7 +45,12 @@ const EditorSection = () => {
           <PanelLeftOpen size={25} />
         </button>
       )}
-      <CodeAndOutput />
+      <CodeAndOutput
+        files={files}
+        setFiles={setFiles}
+        activeFileId={activeFileId}
+        setActiveFileId={setActiveFileId}
+      />
     </div>
   );
 };

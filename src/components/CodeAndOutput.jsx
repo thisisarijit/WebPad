@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const CodeAndOutput = () => {
+const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId }) => {
   const containerRef = useRef(null);
 
   const [codeWidth, setCodeWidth] = useState(50);
@@ -9,8 +9,8 @@ const CodeAndOutput = () => {
     event.currentTarget.setPointerCapture(event.pointerId);
   };
   const handlePointerMove = (event) => {
-    if(!event.currentTarget.hasPointerCapture(event.pointerId)) {
-        return;
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
+      return;
     }
 
     const container = containerRef.current;
@@ -22,11 +22,11 @@ const CodeAndOutput = () => {
   };
 
   const handlePointerUp = (event) => {
-    event.currentTarget.releasePointerCapture(event.pointerId)
+    event.currentTarget.releasePointerCapture(event.pointerId);
   };
   const handlePointerCancel = (event) => {
-    if(event.currentTarget.hasPointerCapture(event.pointerId)) {
-        event.currentTargetreleasePointerCapture(event.pointerId);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTargetreleasePointerCapture(event.pointerId);
     }
   };
 
