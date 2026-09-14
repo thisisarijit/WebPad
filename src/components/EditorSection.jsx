@@ -15,7 +15,8 @@ const initialFiles = [
 const EditorSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [files, setFiles] = useState(initialFiles);
-  const [activeFileId, setActiveFileId] = useState(initialFiles);
+  const [activeFileId, setActiveFileId] = useState(initialFiles[0].id);
+  const [openFileIds, setOpenFileIds] = useState([initialFiles[0].id]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -34,6 +35,8 @@ const EditorSection = () => {
           setFiles={setFiles}
           activeFileId={activeFileId}
           setActiveFileId={setActiveFileId}
+          openFileIds={openFileIds}
+          setOpenFileIds={setOpenFileIds}
         />
       ) : (
         <button
@@ -50,6 +53,8 @@ const EditorSection = () => {
         setFiles={setFiles}
         activeFileId={activeFileId}
         setActiveFileId={setActiveFileId}
+        openFileIds={openFileIds}
+        setOpenFileIds={setOpenFileIds}
       />
     </div>
   );

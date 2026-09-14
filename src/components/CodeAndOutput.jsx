@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
+import CodeSection from "./CodeSection";
 
-const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId }) => {
+const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId, openFileIds, setOpenFileIds }) => {
   const containerRef = useRef(null);
 
+  //width of the code section after dividing by the divider
   const [codeWidth, setCodeWidth] = useState(50);
 
   const handlePointerDown = (event) => {
@@ -26,7 +28,7 @@ const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId }) => {
   };
   const handlePointerCancel = (event) => {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTargetreleasePointerCapture(event.pointerId);
+      event.currentTarget.releasePointerCapture(event.pointerId);
     }
   };
 
@@ -39,7 +41,17 @@ const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId }) => {
       }}
     >
       {/* CODE */}
-      <div className="h-full border-2 rounded-lg">Code</div>
+      <div className="h-full border-2 rounded-lg">
+        {" "}
+        <CodeSection
+          files={files}
+          setFiles={setFiles}
+          activeFileId={activeFileId}
+          setActiveFileId={setActiveFileId}
+          openFileIds={openFileIds}
+          setOpenFileIds={setOpenFileIds}
+        />{" "}
+      </div>
 
       {/* DIVIDER */}
       <div

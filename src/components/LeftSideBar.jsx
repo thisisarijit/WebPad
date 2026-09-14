@@ -6,15 +6,17 @@ const LeftSideBar = ({
   setFiles,
   activeFileId,
   setActiveFileId,
+  openFileIds,
+  setOpenFileIds,
 }) => {
   const handleCreateFile = () => {
     let newFileName = window.prompt("Filename", "");
     if (newFileName === "" || newFileName === null) return;
     const trimmedName = newFileName.trim();
-    const extension = newFileName.split(".").pop().toLowerCase();
-    
+    const extension = trimmedName.split(".").pop().toLowerCase();
+
     //Checking valid extension or not. HTNL / CSS /JS
-    if(extension !== "html" && extension !== "css" && extension !=="js"){
+    if (extension !== "html" && extension !== "css" && extension !== "js") {
       alert("Supported extension: .html, .css, .js");
       return;
     }
@@ -52,6 +54,18 @@ const LeftSideBar = ({
     setFiles((prev) => [...prev, newFile]);
     setActiveFileId(newFile.id);
   };
+
+  const handleFileClick = (fileId) => {
+    setActiveFileId(fileId);
+
+    setOpenFileIds((prev) => {
+      if (prev.includes(fileId)) {
+        return prev;
+      }
+      return [...prev, fileId];
+    });
+  };
+
   return (
     <aside className="rounded-lg border-2 p-2 flex flex-col gap-1">
       <div className="flex items-center justify-around border-b-2 p-1">
@@ -65,10 +79,10 @@ const LeftSideBar = ({
           <button
             type="button"
             key={file.id}
-            onClick={() => setActiveFileId(file.id)}
+            onClick={() => handleFileClick(file.id)}
             className={`my-1 py-1 border-x border-b-2 hover:border-text-primary rounded-lg ${file.id === activeFileId && "border-accent"}`}
           >
-            {file.name}
+            {file.name.toLowerCase()}
           </button>
         ))}
       </div>
