@@ -9,7 +9,12 @@ const CodeSection = ({
   setOpenFileIds,
 }) => {
   const activeTab = files.find((file) => file.id === activeFileId);
-  //   const openedTabs =
+    if(!activeTab)  {
+        return (
+            <div></div>
+        );
+    }
+  
   return (
     <div className="p-1">
       {/* file tabs */}
@@ -24,7 +29,7 @@ const CodeSection = ({
       </div>
 
       {/* code */}
-      <div>{activeTab.content}</div>
+    <div>{activeTab.content}</div>
     </div>
   );
 };

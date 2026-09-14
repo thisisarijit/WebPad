@@ -9,10 +9,17 @@ const FileTabs = ({
   setOpenFileIds,
 }) => {
   const handleCloseTab = (closeId) => {
-    setOpenFileIds((prev) => prev.filter((id) => id !== closeId));
+    const index = openFileIds.findIndex((item) => item === closeId);
+    const remainingFileIds = openFileIds.filter((id) => id !== closeId);
+    setOpenFileIds(remainingFileIds);
     if (closeId === activeFileId) {
-      setActiveFileId(openFileIds[0]);
-    }
+    const newActiveId =
+      remainingFileIds[index] ??
+      remainingFileIds[index - 1] ??
+      null;
+
+    setActiveFileId(newActiveId);
+  }
   };
   return (
     <div className="flex gap-1">
@@ -37,6 +44,7 @@ const FileTabs = ({
               {file.name}
             </button>
 
+            {/* close button for the specific file */}
             <button
               type="button"
               onClick={() => handleCloseTab(file.id)}
