@@ -80,7 +80,7 @@ const LeftSideBar = ({
             type="button"
             key={file.id}
             onClick={() => handleFileClick(file.id)}
-            className={`my-1 py-1 border-x border-b-2 hover:border-text-primary rounded-lg ${file.id === activeFileId && "border-accent"}`}
+            className={`my-1 py-1 border-x border-b-2 hover:border-text-primary rounded-lg ${file.id === activeFileId ? "border-accent" : ""}`}
           >
             {file.name.toLowerCase()}
           </button>
