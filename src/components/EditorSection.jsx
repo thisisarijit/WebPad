@@ -8,7 +8,15 @@ const initialFiles = [
     id: crypto.randomUUID(),
     name: "index.html",
     language: "html",
-    content: "<!DOCTYPE html>\n<html></html>",
+    // content: "<!DOCTYPE html>\n<html></html>",
+    content: `<body>
+  <div class="container">
+    <h1>Todo List</h1>
+    <input type="text" id="taskInput" placeholder="Add new task">
+    <button id="addTaskBtn">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+</body>`,
   },
 ];
 
@@ -17,6 +25,7 @@ const EditorSection = () => {
   const [files, setFiles] = useState(initialFiles);
   const [activeFileId, setActiveFileId] = useState(initialFiles[0].id);
   const [openFileIds, setOpenFileIds] = useState([initialFiles[0].id]);
+  const [previewCode, setPreviewCode] = useState("");
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);

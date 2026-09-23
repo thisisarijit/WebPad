@@ -1,7 +1,15 @@
 import React, { useRef, useState } from "react";
 import CodeSection from "./CodeSection";
+import LivePreview from "./LivePreview";
 
-const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId, openFileIds, setOpenFileIds }) => {
+const CodeAndOutput = ({
+  files,
+  setFiles,
+  activeFileId,
+  setActiveFileId,
+  openFileIds,
+  setOpenFileIds,
+}) => {
   const containerRef = useRef(null);
 
   //width of the code section after dividing by the divider
@@ -65,7 +73,9 @@ const CodeAndOutput = ({ files, setFiles, activeFileId, setActiveFileId, openFil
       </div>
 
       {/* OUTPUT */}
-      <div className="h-full border-2 rounded-lg">Output</div>
+      <div className="h-full border-2 rounded-lg">
+        <LivePreview files={files} />
+      </div>
     </section>
   );
 };

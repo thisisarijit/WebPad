@@ -10,8 +10,6 @@ const CodeSection = ({
   setOpenFileIds,
 }) => {
   const activeFile = files.find((file) => file.id === activeFileId);
-  console.log("ACTIVE FILE ID:", activeFileId);
-  console.log("ACTIVE FILE:", activeFile?.name);
   if (!activeFile) return <div></div>;
 
   //set file content if user make changes(write or delete something) in the content

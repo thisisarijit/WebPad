@@ -74,8 +74,8 @@ const CodeEditor = ({ activeFile, onChange }) => {
   useEffect(()=> {
     if(!viewRef.current || !activeFile) return;
 
-    console.log("CODEMIRROR SWITCHING TO:", activeFile.name);
-    console.log("CONTENT:", activeFile.content);
+    // console.log("CODEMIRROR SWITCHING TO:", activeFile.name);
+    // console.log("CONTENT:", activeFile.content);
 
     const view = viewRef.current;
 
