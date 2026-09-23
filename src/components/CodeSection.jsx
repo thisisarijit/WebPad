@@ -10,9 +10,11 @@ const CodeSection = ({
   setOpenFileIds,
 }) => {
   const activeFile = files.find((file) => file.id === activeFileId);
-  //console.log(activeFile);
+  console.log("ACTIVE FILE ID:", activeFileId);
+  console.log("ACTIVE FILE:", activeFile?.name);
   if (!activeFile) return <div></div>;
-  
+
+  //set file content if user make changes(write or delete something) in the content
   const handleCodeChange = (newContent) => {
     setFiles((prevFiles) =>
       prevFiles.map((file) =>
@@ -20,6 +22,9 @@ const CodeSection = ({
       ),
     );
   };
+
+  // console.log("Files: ");
+  // console.log(files);
   return (
     <div className="p-1 h-full">
       {/* file tabs */}

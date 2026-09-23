@@ -53,6 +53,7 @@ const LeftSideBar = ({
     };
     setFiles((prev) => [...prev, newFile]);
     setActiveFileId(newFile.id);
+    setOpenFileIds((prev)=> [...prev, newFile.id]);
   };
 
   const handleFileClick = (fileId) => {

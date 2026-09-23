@@ -1,13 +1,37 @@
 import { EditorView } from "@codemirror/view";
 import { basicSetup } from "codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 import React, { useEffect, useRef } from "react";
 import { EditorState } from "@codemirror/state";
-import { defaultKeymap } from "@codemirror/commands";
 import { html } from "@codemirror/lang-html";
+import { css } from "@codemirror/lang-css";
+import { javascript } from "@codemirror/lang-javascript";
+
+//get the language extension
+const getLanguageExtension = (language) => {
+  switch (language) {
+    case "html":
+      return html();
+    case "css":
+      return css();
+    case "javascript":
+      return javascript();
+    default:
+      return [];
+  }
+}
+// console.log(getLanguageExtension(activeFile.language).language.name);
 
 const CodeEditor = ({ activeFile, onChange }) => {
   const editorRef = useRef(null);
+  const viewRef = useRef(null);
+  const onChangeRef = useRef(onChange);
+  const isUpdatingFromReact = useRef(false);
+
+  //always keep the latest onChange
+  onChangeRef.current = onChange;
+  
+  // console.log("Active: ");
+  // console.log(activeFile);
 
   useEffect(() => {
     if (!editorRef.current || !activeFile) return;
@@ -16,12 +40,13 @@ const CodeEditor = ({ activeFile, onChange }) => {
       doc: activeFile.content,
       extensions: [
         basicSetup,
-        html(),
+        getLanguageExtension(activeFile.language),
+        
         EditorView.updateListener.of((update) => {
-          if (update.docChanged) {
+          if (update.docChanged && !isUpdatingFromReact.current) {
             const newContent = update.state.doc.toString();
-            // onChange(newContent);
-            console.log(newContent);
+            onChangeRef.current(newContent);
+            // console.log(activeFile.content);
           }
         }),
       ],
@@ -31,10 +56,33 @@ const CodeEditor = ({ activeFile, onChange }) => {
       state: startState,
       parent: editorRef.current,
     });
+
+    viewRef.current = view;
+
     return () => {
       view.destroy();
     };
   }, []);
+
+  useEffect(()=> {
+    if(!viewRef.current || !activeFile) return;
+
+    console.log("CODEMIRROR SWITCHING TO:", activeFile.name);
+    console.log("CONTENT:", activeFile.content);
+
+    const view = viewRef.current;
+
+    isUpdatingFromReact.current = true;
+
+    view.dispatch({
+      changes: {
+        from: 0,
+        to: view.state.doc.length,
+        insert: activeFile.content,
+      }
+    })
+    isUpdatingFromReact.current = false;
+  }, [activeFile.id]);
 
   return <div ref={editorRef} />;
 };
