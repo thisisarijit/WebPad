@@ -1,7 +1,7 @@
 import { EditorView } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 import React, { useEffect, useRef } from "react";
-import { EditorState } from "@codemirror/state";
+import { EditorState, Compartment } from "@codemirror/state";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
 import { javascript } from "@codemirror/lang-javascript";
@@ -26,6 +26,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
   const viewRef = useRef(null);
   const onChangeRef = useRef(onChange);
   const isUpdatingFromReact = useRef(false);
+  const languageCompartment = useRef(new Compartment());
 
   //always keep the latest onChange
   onChangeRef.current = onChange;
@@ -40,8 +41,13 @@ const CodeEditor = ({ activeFile, onChange }) => {
       doc: activeFile.content,
       extensions: [
         basicSetup,
-        getLanguageExtension(activeFile.language),
+
+        //initial language
+        languageCompartment.current.of(
+          getLanguageExtension(activeFile.language),
+        ),
         
+        //listen for user changes
         EditorView.updateListener.of((update) => {
           if (update.docChanged && !isUpdatingFromReact.current) {
             const newContent = update.state.doc.toString();
@@ -64,6 +70,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
     };
   }, []);
 
+  // handle file switching
   useEffect(()=> {
     if(!viewRef.current || !activeFile) return;
 
@@ -79,7 +86,11 @@ const CodeEditor = ({ activeFile, onChange }) => {
         from: 0,
         to: view.state.doc.length,
         insert: activeFile.content,
-      }
+      },
+
+      effects: languageCompartment.current.reconfigure(
+        getLanguageExtension(activeFile.language)
+      ), 
     })
     isUpdatingFromReact.current = false;
   }, [activeFile.id]);
