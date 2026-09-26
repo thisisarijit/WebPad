@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import EditorSection from "../components/EditorSection";
+import ResetModal from "../components/ui/ResetModal";
 
 const initialFiles = [
   {
@@ -95,6 +96,7 @@ const Editor = () => {
   const [openFileIds, setOpenFileIds] = useState(
     savedProject?.openFileIds ?? [initialFiles[0].id],
   );
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const handleSave = () => {
     const project = {
@@ -105,17 +107,24 @@ const Editor = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
   };
 
+  const handleResetRequest = () => {
+    setShowResetModal(true);
+  };
+
   const handleReset = () => {
     localStorage.removeItem(STORAGE_KEY);
+
     setFiles(initialFiles);
     setActiveFileId(initialFiles[0].id);
     setOpenFileIds([initialFiles[0].id]);
+
+    setShowResetModal(false);
   };
 
   return (
     <>
       <div className="h-screen min-h-0 w-screen overflow-hidden flex flex-col p-1 gap-1">
-        <Navbar handleSave={handleSave} handleReset={handleReset} />
+        <Navbar handleSave={handleSave} handleReset={handleResetRequest} />
         <div className="min-h-0 flex-1">
           <EditorSection
             files={files}
@@ -126,6 +135,13 @@ const Editor = () => {
             setOpenFileIds={setOpenFileIds}
           />
         </div>
+        <ResetModal
+          isOpen={showResetModal}
+          title="Reset Project?"
+          message="This will reset the project to its initial state. Your current changes will be lost."
+          onCancel={() => setShowResetModal(false)}
+          onConfirm={handleReset}
+        />
       </div>
     </>
   );

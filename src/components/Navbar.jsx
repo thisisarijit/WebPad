@@ -1,14 +1,13 @@
 import React from "react";
-import ThemeToggleButton from "./ThemeToggleButton";
+// import ThemeToggleButton from "./ThemeToggleButton";
 import { Pencil, Plus } from "lucide-react";
+import ThemeToggleButton from "./ui/ThemeToggleButton";
 
 const Navbar = ({handleSave, handleReset}) => {
   return (
     <nav className="w-full py-1 border-2 rounded-lg">
       <div className="container w-full rounded-lg flex items-center justify-between gap-5">
-        {/* <div className="flex items-center gap-10 "> */}
           <span className="font-extrabold text-2xl text-accent">WebPad</span>
-        {/* </div> */}
 
         <div className="w-full gap-2 flex p-1 items-center just">
           <span className="bg-border hover:bg-panel px-4 py-1 rounded-lg">Untitled</span>
