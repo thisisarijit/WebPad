@@ -108,9 +108,10 @@
     hover:bg-accent-hover active:scale-95;
 }
 
-.cm-editor {
+.code-editor .cm-editor {
   height: 100%;
+  width: 100%;
 }
-.cm-scroller {
+.code-editor .cm-scroller {
   overflow: auto;
 }

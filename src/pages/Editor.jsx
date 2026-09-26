@@ -25,6 +25,10 @@ const initialFiles = [
     language: "css",
     content: `section{
 background: LightGrey;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 border-radius: 15px;
 padding: 20px;
 margin: 20px;
@@ -44,7 +48,6 @@ button {
   font-size: 30px;
   border: none;
   border-radius: 5px;
-  border-radius: 5px
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -111,16 +114,18 @@ const Editor = () => {
 
   return (
     <>
-      <div className="h-screen w-screen overflow-hidden flex flex-col p-1 gap-1">
+      <div className="h-screen min-h-0 w-screen overflow-hidden flex flex-col p-1 gap-1">
         <Navbar handleSave={handleSave} handleReset={handleReset} />
-        <EditorSection
-          files={files}
-          setFiles={setFiles}
-          activeFileId={activeFileId}
-          setActiveFileId={setActiveFileId}
-          openFileIds={openFileIds}
-          setOpenFileIds={setOpenFileIds}
-        />
+        <div className="min-h-0 flex-1">
+          <EditorSection
+            files={files}
+            setFiles={setFiles}
+            activeFileId={activeFileId}
+            setActiveFileId={setActiveFileId}
+            openFileIds={openFileIds}
+            setOpenFileIds={setOpenFileIds}
+          />
+        </div>
       </div>
     </>
   );

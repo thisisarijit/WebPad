@@ -92,7 +92,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
 
     isUpdatingFromReact.current = false;
   }, [activeFile.id]);
-  return <div ref={editorRef} className="h-full w-full overflow-hidden" />;
+  return <div ref={editorRef} className="code-editor h-full w-full overflow-hidden" />;
 };
 
 export default CodeEditor;

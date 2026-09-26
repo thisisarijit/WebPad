@@ -43,13 +43,13 @@ const CodeAndOutput = ({
   return (
     <section
       ref={containerRef}
-      className="grid h-full min-h-0 min-w-0 gap-1 rounded-lg"
+      className="grid h-full min-h-0 min-w-0 gap-1 rounded-lg overflow-hidden"
       style={{
         gridTemplateColumns: `${codeWidth}% 6px minmax(0, 1fr)`,
       }}
     >
       {/* CODE */}
-      <div className="h-full border-2 rounded-lg">
+      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
         {" "}
         <CodeSection
           files={files}
@@ -73,7 +73,7 @@ const CodeAndOutput = ({
       </div>
 
       {/* OUTPUT */}
-      <div className="h-full border-2 rounded-lg bg-white">
+      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg bg-white">
         <LivePreview files={files} />
       </div>
     </section>

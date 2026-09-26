@@ -19,7 +19,7 @@ const EditorSection = ({
 
   return (
     <div
-      className={`grid h-full w-full gap-1 ${
+      className={`grid h-full min-h-0 w-full gap-1 overflow-hidden ${
         isSidebarOpen ? "grid-cols-[1fr_5fr]" : "grid-cols-[48px_minmax(0,1fr)]"
       }`}
     >
