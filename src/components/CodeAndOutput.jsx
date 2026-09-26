@@ -27,7 +27,7 @@ const CodeAndOutput = ({
     const rect = container.getBoundingClientRect();
     const newWidth = ((event.clientX - rect.left) / rect.width) * 100;
 
-    const safeWidth = Math.min(80, Math.max(20, newWidth));
+    const safeWidth = Math.min(70, Math.max(30, newWidth));
     setCodeWidth(safeWidth);
   };
 
@@ -43,7 +43,7 @@ const CodeAndOutput = ({
   return (
     <section
       ref={containerRef}
-      className="grid h-full min-w-0 gap-1 rounded-lg"
+      className="grid h-full min-h-0 min-w-0 gap-1 rounded-lg"
       style={{
         gridTemplateColumns: `${codeWidth}% 6px minmax(0, 1fr)`,
       }}
@@ -73,7 +73,7 @@ const CodeAndOutput = ({
       </div>
 
       {/* OUTPUT */}
-      <div className="h-full border-2 rounded-lg">
+      <div className="h-full border-2 rounded-lg bg-white">
         <LivePreview files={files} />
       </div>
     </section>

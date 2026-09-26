@@ -107,3 +107,10 @@
     transition-all duration-300 rounded-sm cursor-pointer
     hover:bg-accent-hover active:scale-95;
 }
+
+.cm-editor {
+  height: 100%;
+}
+.cm-scroller {
+  overflow: auto;
+}

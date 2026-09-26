@@ -17,7 +17,6 @@ const LivePreview = ({ files }) => {
                 ${cssCode?.content ?? ""}
                 </style>
             </head>
-            
             <body>
                 ${htmlCode?.content ?? ""}
                 <script>
@@ -39,7 +38,7 @@ const LivePreview = ({ files }) => {
       title="Live Preview"
       srcDoc={previewCode}
       sandbox="allow-scripts allow-modals"
-      className="h-full w-ull"
+      className="h-full w-full"
     />
   );
 };

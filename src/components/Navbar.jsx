@@ -2,7 +2,7 @@ import React from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { Pencil, Plus } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({handleSave, handleReset}) => {
   return (
     <nav className="w-full py-1 border-2 rounded-lg">
       <div className="container w-full rounded-lg flex items-center justify-between gap-5">
@@ -20,11 +20,11 @@ const Navbar = () => {
             <ThemeToggleButton />
             {/* <ThemeToggle /> */}
           </div>
-          <div className="cosmic-button hover:bg-border bg-background text-accent border-accent border">
-            Save
-          </div>
-          <div className="cosmic-button text-background">Run</div>
-          <div className="rounded-full h-8 w-8 bg-green-400"></div>
+          <button onClick={handleReset} className="cosmic-button">
+            Reset
+          </button>
+          <button onClick={handleSave} className="cosmic-button bg-green-600 hover:bg-green-400">Save</button>
+          <div className="rounded-full h-8 w-8 bg-accent flex items-center justify-center font-extrabold">A</div>
         </div>
       </div>
     </nav>

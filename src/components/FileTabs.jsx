@@ -30,16 +30,16 @@ const FileTabs = ({
         return (
           <div
             key={file.id}
-            className={`border rounded-lg flex items-center hover:border-text-primary ${
+            className={`rounded-lg flex items-center justify-center hover:border-accent hover:border ${
               file.id === activeFileId
-                ? "text-accent border-accent border-2"
+                ? "text-accent border-accent border"
                 : ""
             }`}
           >
             <button
               type="button"
               onClick={() => setActiveFileId(file.id)}
-              className="py-1 px-2 cursor-pointer"
+              className="px-1 cursor-pointer"
             >
               {file.name}
             </button>

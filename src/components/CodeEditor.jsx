@@ -18,7 +18,7 @@ const getLanguageExtension = (language) => {
     default:
       return [];
   }
-}
+};
 // console.log(getLanguageExtension(activeFile.language).language.name);
 
 const CodeEditor = ({ activeFile, onChange }) => {
@@ -30,7 +30,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
 
   //always keep the latest onChange
   onChangeRef.current = onChange;
-  
+
   // console.log("Active: ");
   // console.log(activeFile);
 
@@ -46,7 +46,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
         languageCompartment.current.of(
           getLanguageExtension(activeFile.language),
         ),
-        
+
         //listen for user changes
         EditorView.updateListener.of((update) => {
           if (update.docChanged && !isUpdatingFromReact.current) {
@@ -70,12 +70,9 @@ const CodeEditor = ({ activeFile, onChange }) => {
     };
   }, []);
 
-  // handle file switching
-  useEffect(()=> {
-    if(!viewRef.current || !activeFile) return;
-
-    // console.log("CODEMIRROR SWITCHING TO:", activeFile.name);
-    // console.log("CONTENT:", activeFile.content);
+  // useEffect for file switching
+  useEffect(() => {
+    if (!viewRef.current || !activeFile) return;
 
     const view = viewRef.current;
 
@@ -89,13 +86,13 @@ const CodeEditor = ({ activeFile, onChange }) => {
       },
 
       effects: languageCompartment.current.reconfigure(
-        getLanguageExtension(activeFile.language)
-      ), 
-    })
+        getLanguageExtension(activeFile.language),
+      ),
+    });
+
     isUpdatingFromReact.current = false;
   }, [activeFile.id]);
-
-  return <div ref={editorRef} />;
+  return <div ref={editorRef} className="h-full w-full overflow-hidden" />;
 };
 
 export default CodeEditor;

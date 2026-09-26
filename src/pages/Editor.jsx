@@ -1,13 +1,126 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import EditorSection from "../components/EditorSection";
 
+const initialFiles = [
+  {
+    id: crypto.randomUUID(),
+    name: "index.html",
+    language: "html",
+    content: `<body>
+<section>
+  <h1>COUNTER</h1>
+  <div id="count">
+    <button onclick="decrease()">−</button>
+    <div id="count-val">0</div>
+    <button onclick="increase()">+</button>
+  </div>
+  </section>
+</body>
+    `,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "style.css",
+    language: "css",
+    content: `section{
+background: LightGrey;
+border-radius: 15px;
+padding: 20px;
+margin: 20px;
+}
+#count {
+  font-size: 40px;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+button {
+  background: LightGreen;
+  font-size: 30px;
+  border: none;
+  border-radius: 5px;
+  border-radius: 5px
+  padding: 10px 20px;
+  cursor: pointer;
+}
+    `,
+  },
+
+  {
+    id: crypto.randomUUID(),
+    name: "script.js",
+    language: "javascript",
+    content: `let count = 0;
+function increase() {
+  count++;
+  document.getElementById("count-val").textContent = count;
+}
+function decrease() {
+  count--;
+  document.getElementById("count-val").textContent = count;
+}
+    `,
+  },
+];
+const STORAGE_KEY = "web-editor-project";
+
 const Editor = () => {
+  const loadSavedProject = () => {
+    const project = localStorage.getItem(STORAGE_KEY);
+
+    if (!project) return null;
+
+    try {
+      return JSON.parse(project);
+    } catch (error) {
+      console.error("Failed to load saved project: ", error);
+      return null;
+    }
+  };
+
+  const savedProject = loadSavedProject();
+
+  const [files, setFiles] = useState(savedProject?.files ?? initialFiles);
+  const [activeFileId, setActiveFileId] = useState(
+    savedProject?.activeFileId ?? initialFiles[0].id,
+  );
+  const [openFileIds, setOpenFileIds] = useState(
+    savedProject?.openFileIds ?? [initialFiles[0].id],
+  );
+
+  const handleSave = () => {
+    const project = {
+      files,
+      activeFileId,
+      openFileIds,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
+  };
+
+  const handleReset = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setFiles(initialFiles);
+    setActiveFileId(initialFiles[0].id);
+    setOpenFileIds([initialFiles[0].id]);
+  };
+
   return (
     <>
       <div className="h-screen w-screen overflow-hidden flex flex-col p-1 gap-1">
-        <Navbar />
-        <EditorSection />
+        <Navbar handleSave={handleSave} handleReset={handleReset} />
+        <EditorSection
+          files={files}
+          setFiles={setFiles}
+          activeFileId={activeFileId}
+          setActiveFileId={setActiveFileId}
+          openFileIds={openFileIds}
+          setOpenFileIds={setOpenFileIds}
+        />
       </div>
     </>
   );

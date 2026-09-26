@@ -24,7 +24,7 @@ const CodeSection = ({
   // console.log("Files: ");
   // console.log(files);
   return (
-    <div className="p-1 h-full">
+    <div className="h-full w-full p-1">
       {/* file tabs */}
       <div className="p-1 border-b-2">
         <FileTabs
@@ -37,7 +37,7 @@ const CodeSection = ({
       </div>
 
       {/* code */}
-      <div className="h-full">
+      <div className="h-full w-full text-left">
         <CodeEditor onChange={handleCodeChange} activeFile={activeFile} />
       </div>
     </div>
