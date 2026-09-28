@@ -73,7 +73,7 @@ const CodeAndOutput = ({
       </div>
 
       {/* OUTPUT */}
-      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg bg-white">
+      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
         <LivePreview files={files} />
       </div>
     </section>

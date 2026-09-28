@@ -41,7 +41,7 @@ const CodeEditor = ({ activeFile, onChange }) => {
       doc: activeFile.content,
       extensions: [
         basicSetup,
-
+        
         //initial language
         languageCompartment.current.of(
           getLanguageExtension(activeFile.language),
