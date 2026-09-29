@@ -22,7 +22,7 @@ const FileTabs = ({
   }
   };
   return (
-    <div className="flex gap-1">
+    <div className="flex">
       {files.map((file) => {
         if (!openFileIds.includes(file.id)) {
           return null;
@@ -30,9 +30,9 @@ const FileTabs = ({
         return (
           <div
             key={file.id}
-            className={`rounded-lg flex items-center justify-center hover:border-accent hover:border ${
+            className={`rounded-t-sm flex items-center justify-center hover:bg-border/60 ${
               file.id === activeFileId
-                ? "text-accent border-accent border"
+                ? "text-accent bg-border border-2"
                 : ""
             }`}
           >

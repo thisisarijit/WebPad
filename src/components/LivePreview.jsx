@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ConsolePanel from "./ConsolePanel";
+import { Terminal } from "lucide-react";
 
 const LivePreview = ({ files }) => {
   const [previewCode, setPreviewCode] = useState("");
@@ -12,8 +13,8 @@ const LivePreview = ({ files }) => {
 
   //   console.log(htmlCode);
   useEffect(() => {
-    setLogs([]);
     const timer = setTimeout(() => {
+      setLogs([]);
       const htmlCode = files.find((file) => file.language === "html");
       const cssCode = files.find((file) => file.language === "css");
       const jsCode = files.find((file) => file.language === "javascript");
@@ -132,7 +133,7 @@ const LivePreview = ({ files }) => {
       </div>
 
       {isConsoleOpen ? (
-        <div className="h-30 border-t">
+        <div className="h-40">
           <ConsolePanel
             logs={logs}
             onClear={handleClear}
@@ -140,9 +141,13 @@ const LivePreview = ({ files }) => {
           />
         </div>
       ) : (
-        <div className="h-8 border-t-2 flex items-center px-3">
-          <button onClick={toggleConsole} className="cursor-pointer text-panel hover:text-text-primary">
-            Console ↑
+        <div className="flex items-center px-4 py-2">
+          <button
+            onClick={toggleConsole}
+            className="flex items-center gap-1 cursor-pointer px-2 text-text-secondary hover:bg-accent-hover/30 hover:text-text-primary rounded-sm"
+          >
+            <Terminal size={20} />
+            Console
           </button>
         </div>
       )}

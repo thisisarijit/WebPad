@@ -43,7 +43,7 @@ const CodeAndOutput = ({
   return (
     <section
       ref={containerRef}
-      className="grid h-full min-h-0 min-w-0 gap-1 rounded-lg overflow-hidden"
+      className="flex flex-col-reverse sm:grid h-full min-h-0 min-w-0  rounded-lg overflow-hidden"
       style={{
         gridTemplateColumns: `${codeWidth}% 6px minmax(0, 1fr)`,
       }}
@@ -67,7 +67,7 @@ const CodeAndOutput = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
-        className="group relative cursor-col-resize touch-none"
+        className="group relative cursor-col-resize touch-none flex justify-center"
       >
         <div className="h-full w-1 bg-panel group-hover:bg-text-primary rounded-lg" />
       </div>

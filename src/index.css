@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 #root {
   max-width: 100%;
   margin: 0 auto;
@@ -40,14 +41,13 @@
 @layer base {
   :root {
     --background: 225, 40%, 98%;
-    --panel: 225, 20%, 70%;
-    --border: 222, 22%, 91%;
+    --panel: 225, 20%, 65%;
+    --border: 222, 22%, 86%;
 
     --text-primary: 230, 21%, 11%;
     --text-secondary: 220, 10%, 45%;
 
     --accent: 244, 77%, 62%;
-    /* --accent-hover: 243, 65%, 56%; */
     --accent-hover: 244, 60%, 69%;
   }
 
@@ -70,7 +70,7 @@
   }
 
   body {
-    @apply bg-background  text-text-primary transition-colors duration-300;
+    @apply bg-background text-text-primary transition-colors duration-300;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;

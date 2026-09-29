@@ -34,14 +34,16 @@ const EditorSection = ({
           setOpenFileIds={setOpenFileIds}
         />
       ) : (
-        <button
-          type="button"
-          onClick={toggleSidebar}
-          className="flex items-start justify-center rounded-lg border-2 pt-3"
-          aria-label="Open sidebar"
-        >
-          <PanelLeftOpen size={25} />
-        </button>
+        // <button
+        //   type="button"
+        //   onClick={toggleSidebar}
+        //   className="flex items-start justify-center rounded-lg border-2 pt-3"
+        //   aria-label="Open sidebar"
+        // >
+        <div  className="flex items-start justify-center rounded-lg border-2 pt-2">
+          <PanelLeftOpen size={35} onClick={toggleSidebar} className="p-1 text-text-secondary cursor-pointer rounded-sm hover:bg-accent-hover/30 hover:text-text-primary" />
+        </div>
+        // </button>
       )}
       <CodeAndOutput
         files={files}

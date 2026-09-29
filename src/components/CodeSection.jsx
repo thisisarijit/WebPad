@@ -24,9 +24,9 @@ const CodeSection = ({
   // console.log("Files: ");
   // console.log(files);
   return (
-    <div className="flex h-full min-h-0 w-full flex-col p-1">
+    <div className="flex h-full min-h-0 w-full flex-col">
       {/* file tabs */}
-      <div className="shrink-0 p-1 border-b-2">
+      <div className="shrink-0 border-b-2 rounded-t-md">
         <FileTabs
           files={files}
           activeFileId={activeFileId}

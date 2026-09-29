@@ -29,7 +29,7 @@ const ThemeToggleButton = () => {
   return (
     <button
       onClick={handleTheme}
-      className=" p-2 rounded-full transition-colors duration-300 focus:outline-hidden cursor-pointer"
+      className=" p-1 hover:bg-accent-hover/30 rounded-full transition-colors duration-300 focus:outline-hidden cursor-pointer"
     >
       {isDarkMode ? (
         <Sun className="h-6 w-6 text-yellow-400" />
