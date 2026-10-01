@@ -12,53 +12,6 @@ const LeftSideBar = ({
   openFileIds,
   setOpenFileIds,
 }) => {
-  const handleCreateFile = () => {
-    let newFileName = window.prompt("Filename", "");
-    if (newFileName === "" || newFileName === null) return;
-    const trimmedName = newFileName.trim();
-    const extension = trimmedName.split(".").pop().toLowerCase();
-
-    //Checking valid extension or not. HTNL / CSS /JS
-    if (extension !== "html" && extension !== "css" && extension !== "js") {
-      alert("Supported extension: .html, .css, .js");
-      return;
-    }
-
-    //duplicate file check
-    const alreadyExist = files.some(
-      (file) => file.name.toLowerCase() === trimmedName.toLowerCase(),
-    );
-    if (alreadyExist) {
-      alert("File already exists.");
-      return;
-    }
-
-    //Get the Extension name from the file.
-    const getLanguageFromFileName = (newFileName) => {
-      switch (extension) {
-        case "html":
-          return "html";
-        case "css":
-          return "css";
-        case "js":
-          return "javascript";
-        default:
-          return "plaintext";
-      }
-    };
-
-    //NEW FILE
-    const newFile = {
-      id: crypto.randomUUID(),
-      name: trimmedName,
-      language: getLanguageFromFileName(trimmedName),
-      content: "",
-    };
-    setFiles((prev) => [...prev, newFile]);
-    setActiveFileId(newFile.id);
-    setOpenFileIds((prev) => [...prev, newFile.id]);
-  };
-
   const handleFileClick = (fileId) => {
     setActiveFileId(fileId);
 
@@ -107,12 +60,6 @@ const LeftSideBar = ({
           </button>
         ))}
       </div>
-      <button
-        onClick={handleCreateFile}
-        className="bg-panel w-full cosmic-button"
-      >
-        +
-      </button>
     </aside>
   );
 };
