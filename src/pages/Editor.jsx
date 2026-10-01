@@ -240,20 +240,107 @@ const Editor = () => {
     setShowResetModal(false);
   };
 
-  const handleRenameProject = () => {};
+  const handleRenameProject = () => {
+    const currentProject = projects.find(
+      (project) => project.id === activeProjectId,
+    );
 
-  const handleDeleteProject = () => {};
+    if (!currentProject) return;
+
+    const projectName = window.prompt("Rename Project?", currentProject.name);
+    if (projectName === null) return;
+
+    const trimmedName = projectName.trim();
+    if (!trimmedName) {
+      alert("Project name can not be empty");
+      return;
+    }
+
+    const alreadyExist = projects.some(
+      (project) =>
+        project.id !== activeProjectId &&
+        project.name.toLowerCase() === trimmedName.toLowerCase(),
+    );
+    if (alreadyExist) {
+      alert("A project with this name already exists.");
+      return;
+    }
+
+    setProjects((prevProjects) => {
+      const updatedProjects = prevProjects.map((project) =>
+        project.id === activeProjectId
+          ? {
+              ...project,
+              name: trimmedName,
+            }
+          : project,
+      );
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          projects: updatedProjects,
+          activeProjectId,
+        }),
+      );
+
+      return updatedProjects;
+    });
+  };
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const handleDeleteRequest = () => {
+    if (projects.length <= 1) {
+      alert("You can not delete the last project.");
+      return;
+    }
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteProject = () => {
+    if (projects.length <= 1) return;
+
+    const deletedIndex = projects.findIndex(
+      (project) => project.id === activeProjectId,
+    );
+    if (deletedIndex === -1) {
+      return;
+    }
+    const updatedProjects = projects.filter(
+      (project) => project.id !== activeProjectId,
+    );
+
+    const newActiveProject =
+      updatedProjects[deletedIndex] ?? updatedProjects[deletedIndex - 1];
+
+    const updatedActiveProjectId = newActiveProject.id;
+    setProjects(updatedProjects);
+    setActiveProjectId(updatedActiveProjectId);
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        projects: updatedProjects,
+        activeProjectId: updatedActiveProjectId,
+      }),
+    );
+
+    setShowDeleteModal(false);
+  };
 
   return (
     <>
       <div className="h-screen min-h-0 w-screen overflow-hidden flex flex-col p-1 gap-1">
         <Navbar
-          handleSave={handleSave}
-          handleReset={handleResetRequest}
           projects={projects}
           activeProjectId={activeProjectId}
           setActiveProjectId={setActiveProjectId}
           handleCreateProject={handleCreateProject}
+          handleRenameProject={handleRenameProject}
+          handleDeleteRequest={handleDeleteRequest}
+          handleSave={handleSave}
+          handleReset={handleResetRequest}
         />
         <div className="min-h-0 flex-1">
           <EditorSection
@@ -265,12 +352,23 @@ const Editor = () => {
             setOpenFileIds={setOpenFileIds}
           />
         </div>
+        {/* R E S E T  PROJECT*/}
         <ResetModal
           isOpen={showResetModal}
           title="Reset Project?"
           message="This will reset the project to its initial state. Your current changes will be lost."
           onCancel={() => setShowResetModal(false)}
           onConfirm={handleReset}
+          confirmText="Reset"
+        />
+        {/* D E L E T E  PROJECT */}
+        <ResetModal
+          isOpen={showDeleteModal}
+          title="Delete Project?"
+          message={`Are you sure you want to delete "${activeProject?.name}"? This action cannot be undone.`}
+          onCancel={() => setShowDeleteModal(false)}
+          onConfirm={handleDeleteProject}
+          confirmText="Delete"
         />
       </div>
     </>

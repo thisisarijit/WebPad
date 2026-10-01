@@ -1,6 +1,6 @@
 import React from "react";
 
-const ResetModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
+const ResetModal = ({ isOpen, title, message, onCancel, onConfirm, confirmText = "Confirm", }) => {
   if (!isOpen) return null;
 
   return (
@@ -20,7 +20,7 @@ const ResetModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
             Cancel
           </button>
           <button type="button" className="cosmic-button" onClick={onConfirm}>
-            Reset
+            {confirmText}
           </button>
         </div>
       </div>
