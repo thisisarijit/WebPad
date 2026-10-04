@@ -2,15 +2,9 @@ import { useState } from "react";
 import { PanelLeftOpen } from "lucide-react";
 import LeftSideBar from "./LeftSideBar";
 import CodeAndOutput from "./CodeAndOutput";
+import { useProjectContext } from "../context/ProjectContext";
 
-const EditorSection = ({
-  files,
-  setFiles,
-  activeFileId,
-  setActiveFileId,
-  openFileIds,
-  setOpenFileIds,
-}) => {
+const EditorSection = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -24,35 +18,17 @@ const EditorSection = ({
       }`}
     >
       {isSidebarOpen ? (
-        <LeftSideBar
-          onToggle={toggleSidebar}
-          files={files}
-          setFiles={setFiles}
-          activeFileId={activeFileId}
-          setActiveFileId={setActiveFileId}
-          openFileIds={openFileIds}
-          setOpenFileIds={setOpenFileIds}
-        />
+        <LeftSideBar onToggle={toggleSidebar} />
       ) : (
-        // <button
-        //   type="button"
-        //   onClick={toggleSidebar}
-        //   className="flex items-start justify-center rounded-lg border-2 pt-3"
-        //   aria-label="Open sidebar"
-        // >
-        <div  className="flex items-start justify-center rounded-lg border-2 pt-2">
-          <PanelLeftOpen size={35} onClick={toggleSidebar} className="p-1 text-text-secondary cursor-pointer rounded-sm hover:bg-accent-hover/30 hover:text-text-primary" />
+        <div className="flex items-start justify-center rounded-lg border-2 pt-2">
+          <PanelLeftOpen
+            size={35}
+            onClick={toggleSidebar}
+            className="p-1 text-text-secondary cursor-pointer rounded-sm hover:bg-accent-hover/30 hover:text-text-primary"
+          />
         </div>
-        // </button>
       )}
-      <CodeAndOutput
-        files={files}
-        setFiles={setFiles}
-        activeFileId={activeFileId}
-        setActiveFileId={setActiveFileId}
-        openFileIds={openFileIds}
-        setOpenFileIds={setOpenFileIds}
-      />
+      <CodeAndOutput />
     </div>
   );
 };

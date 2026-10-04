@@ -2,17 +2,8 @@ import React, { useRef, useState } from "react";
 import CodeSection from "./CodeSection";
 import LivePreview from "./LivePreview";
 
-const CodeAndOutput = ({
-  files,
-  setFiles,
-  activeFileId,
-  setActiveFileId,
-  openFileIds,
-  setOpenFileIds,
-}) => {
+const CodeAndOutput = () => {
   const containerRef = useRef(null);
-
-  //width of the code section after dividing by the divider
   const [codeWidth, setCodeWidth] = useState(50);
 
   const handlePointerDown = (event) => {
@@ -43,7 +34,7 @@ const CodeAndOutput = ({
   return (
     <section
       ref={containerRef}
-      className="flex flex-col-reverse sm:grid h-full min-h-0 min-w-0  rounded-lg overflow-hidden"
+      className="flex flex-col-reverse sm:grid h-full min-h-0 min-w-0 rounded-lg overflow-hidden"
       style={{
         gridTemplateColumns: `${codeWidth}% 6px minmax(0, 1fr)`,
       }}
@@ -51,14 +42,7 @@ const CodeAndOutput = ({
       {/* CODE */}
       <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
         {" "}
-        <CodeSection
-          files={files}
-          setFiles={setFiles}
-          activeFileId={activeFileId}
-          setActiveFileId={setActiveFileId}
-          openFileIds={openFileIds}
-          setOpenFileIds={setOpenFileIds}
-        />{" "}
+        <CodeSection />
       </div>
 
       {/* DIVIDER */}
@@ -67,14 +51,14 @@ const CodeAndOutput = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
-        className="group relative cursor-col-resize touch-none flex justify-center"
+        className="group relative cursor-row-resize sm:cursor-col-resize touch-none flex justify-center"
       >
-        <div className="h-full w-1 bg-panel group-hover:bg-text-primary rounded-lg" />
+        <div className="w-full h-1 sm:h-full sm:w-1 bg-panel group-hover:bg-text-primary rounded-lg" />
       </div>
 
       {/* OUTPUT */}
       <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
-        <LivePreview files={files} />
+        <LivePreview />
       </div>
     </section>
   );

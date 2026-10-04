@@ -1,40 +1,20 @@
 import { Moon, Sun } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useThemeContext } from "../../context/ThemeContext";
 
 const ThemeToggleButton = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, toggleTheme } = useThemeContext();
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setIsDarkMode(false);
-      localStorage.setItem("theme", "light");
-    }
-  }, []);
-
-  const handleTheme = () => {
-    if (isDarkMode) {
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
-      localStorage.setItem("theme", "dark");
-    }
-  };
   return (
     <button
-      onClick={handleTheme}
-      className=" p-1 hover:bg-accent-hover/30 rounded-full transition-colors duration-300 focus:outline-hidden cursor-pointer"
+      onClick={toggleTheme}
+      className="flex h-10 w-10 items-center justify-center
+      rounded-full border border-border bg-panel/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-accent/10 cursor-pointer
+      "
     >
       {isDarkMode ? (
-        <Sun className="h-6 w-6 text-yellow-400" />
+        <Sun className="h-5 w-5 text-yellow-400" />
       ) : (
-        <Moon className="h-6 w-6 text-blue-800" />
+        <Moon className="h-5 w-5 text-blue-800" />
       )}
     </button>
   );

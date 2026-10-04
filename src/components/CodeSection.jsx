@@ -1,14 +1,13 @@
 import React from "react";
 import FileTabs from "./FileTabs";
 import CodeEditor from "./CodeEditor";
-const CodeSection = ({
-  files,
-  setFiles,
-  activeFileId,
-  setActiveFileId,
-  openFileIds,
-  setOpenFileIds,
-}) => {
+import { useProjectContext } from "../context/ProjectContext";
+const CodeSection = () => {
+  const {
+    files,
+    setFiles,
+    activeFileId,
+  } = useProjectContext();
   const activeFile = files.find((file) => file.id === activeFileId);
   if (!activeFile) return <div></div>;
 
@@ -27,13 +26,7 @@ const CodeSection = ({
     <div className="flex h-full min-h-0 w-full flex-col">
       {/* file tabs */}
       <div className="shrink-0 border-b-2 rounded-t-md">
-        <FileTabs
-          files={files}
-          activeFileId={activeFileId}
-          setActiveFileId={setActiveFileId}
-          openFileIds={openFileIds}
-          setOpenFileIds={setOpenFileIds}
-        />
+        <FileTabs />
       </div>
 
       {/* code */}

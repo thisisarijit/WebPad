@@ -1,25 +1,20 @@
 import { X } from "lucide-react";
 import React from "react";
+import { useProjectContext } from "../context/ProjectContext";
 
-const FileTabs = ({
-  files,
-  activeFileId,
-  setActiveFileId,
-  openFileIds,
-  setOpenFileIds,
-}) => {
+const FileTabs = () => {
+  const { files, activeFileId, setActiveFileId, openFileIds, setOpenFileIds } =
+    useProjectContext();
   const handleCloseTab = (closeId) => {
     const index = openFileIds.findIndex((item) => item === closeId);
     const remainingFileIds = openFileIds.filter((id) => id !== closeId);
     setOpenFileIds(remainingFileIds);
     if (closeId === activeFileId) {
-    const newActiveId =
-      remainingFileIds[index] ??
-      remainingFileIds[index - 1] ??
-      null;
+      const newActiveId =
+        remainingFileIds[index] ?? remainingFileIds[index - 1] ?? null;
 
-    setActiveFileId(newActiveId);
-  }
+      setActiveFileId(newActiveId);
+    }
   };
   return (
     <div className="flex">
@@ -31,9 +26,7 @@ const FileTabs = ({
           <div
             key={file.id}
             className={`rounded-t-sm flex items-center justify-center hover:bg-border/60 ${
-              file.id === activeFileId
-                ? "text-accent bg-border border-2"
-                : ""
+              file.id === activeFileId ? "text-accent bg-border border-2" : ""
             }`}
           >
             <button

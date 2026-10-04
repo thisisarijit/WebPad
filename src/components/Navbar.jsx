@@ -1,27 +1,26 @@
 import React, { useRef, useState, useEffect } from "react";
 import {
-  Delete,
-  EllipsisVertical,
   Plus,
   RefreshCcw,
   Save,
-  Thermometer,
   ChevronDown,
   Pencil,
   Trash2,
 } from "lucide-react";
 import ThemeToggleButton from "./ui/ThemeToggleButton";
+import { Link } from "react-router-dom";
+import { useProjectContext } from "../context/ProjectContext";
 
-const Navbar = ({
-  projects,
-  activeProjectId,
-  setActiveProjectId,
-  handleCreateProject,
-  handleRenameProject,
-  handleDeleteRequest,
-  handleSave,
-  handleReset,
-}) => {
+const Navbar = ({ handleReset, handleDeleteRequest }) => {
+  const {
+    projects,
+    activeProjectId,
+    setActiveProjectId,
+    handleCreateProject,
+    handleRenameProject,
+    handleSave,
+  } = useProjectContext();
+
   const [isProjectMenuOpen, setIsProjectMenuOpen] = useState(false);
   const projectMenuRef = useRef(null);
 
@@ -47,14 +46,16 @@ const Navbar = ({
   return (
     <nav className="w-full py-1 border-2 rounded-lg ">
       <div className="container w-full rounded-lg flex items-center justify-between gap-5">
-        <span className="font-extrabold text-2xl text-accent">WebPad</span>
+        <Link className="font-extrabold text-2xl text-accent" to="/">
+          WebPad
+        </Link>
 
         <div className="w-full gap-2 flex p-1 items-center">
           <div className="relative" ref={projectMenuRef}>
             <button
               type="button"
               onClick={() => setIsProjectMenuOpen((prev) => !prev)}
-              className="flex items-center gap-2 rounded-lg bg-border px-3 py-2 text-sm text-text-primary hover:bg-panel"
+              className="flex items-center gap-2 rounded-md bg-border px-5 py-2 text-sm text-text-primary hover:bg-panel"
             >
               <span>{activeProject?.name}</span>
 
@@ -79,8 +80,8 @@ const Navbar = ({
                       }}
                       className={`w-full rounded-lg px-3 py-2 text-left text-sm ${
                         project.id === activeProjectId
-                          ? "bg-panel text-accent"
-                          : "text-text-primary hover:bg-panel"
+                          ? "bg-panel text-text-primary"
+                          : "text-text-secondary hover:bg-panel hover:text-text-primary"
                       }`}
                     >
                       {project.name}
@@ -108,7 +109,7 @@ const Navbar = ({
                     setIsProjectMenuOpen(false);
                     handleDeleteRequest();
                   }}
-                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-primary hover:bg-panel"
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-500 hover:bg-panel "
                 >
                   <Trash2 size={15} />
                   Delete Project
@@ -117,8 +118,9 @@ const Navbar = ({
             )}
           </div>
           <Plus
+          size={33}
             onClick={handleCreateProject}
-            className="cursor-pointer text-panel hover:text-text-primary "
+            className="cursor-pointer px-2 bg-accent rounded-md hover:bg-accent-hover transition-all duration-300 active:scale-90"
           />
         </div>
 

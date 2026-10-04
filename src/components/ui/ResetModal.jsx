@@ -4,7 +4,7 @@ const ResetModal = ({ isOpen, title, message, onCancel, onConfirm, confirmText =
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 ">
       <div className="w-full max-w-md rounded-xl bg-border p-6">
         <h2 className="border-b border-text-primary pb-2 text-xl font-semibold text-text-primary">
           {title}

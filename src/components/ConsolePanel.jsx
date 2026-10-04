@@ -14,17 +14,18 @@ const ConsolePanel = ({ logs, onClear, toggleConsole }) => {
   return (
     <div className="h-full flex flex-col">
       <div className="bg-border flex items-center justify-between px-4 text-text-primary py-2">
-        <button
-          className="px-2 rounded-sm flex items-center gap-1 cursor-pointer bg-accent-hover/50 text-text-primary"
-          onClick={toggleConsole}
+        <span
+          className="px-2 rounded-sm flex items-center gap-1 bg-background text-accent"
         >
           <Terminal size={20} />
           Console
-        </button>
-        <button
-          className="cursor-pointer hover:text-accent"
-          onClick={onClear}
-        >
+          <X
+            size={20}
+            onClick={toggleConsole}
+            className="p-0.5 cursor-pointer rounded-sm text-text-secondary hover:text-text-primary hover:bg-border/80"
+          />
+        </span>
+        <button className="cursor-pointer hover:text-accent" onClick={onClear}>
           Clear
         </button>
       </div>
@@ -32,7 +33,7 @@ const ConsolePanel = ({ logs, onClear, toggleConsole }) => {
       <div className="flex-1 overflow-auto p-3">
         {logs.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-text-secondary">
-            <TerminalSquare  size={50} />
+            <TerminalSquare size={50} />
             <p>No console output</p>
           </div>
         ) : (

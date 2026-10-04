@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ConsolePanel from "./ConsolePanel";
 import { Terminal } from "lucide-react";
+import { useProjectContext } from "../context/ProjectContext";
 
-const LivePreview = ({ files }) => {
+const LivePreview = () => {
+  const {files} = useProjectContext();
   const [previewCode, setPreviewCode] = useState("");
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
   const [logs, setLogs] = useState([]);
@@ -141,7 +143,7 @@ const LivePreview = ({ files }) => {
           />
         </div>
       ) : (
-        <div className="flex items-center px-4 py-2">
+        <div className="flex items-center px-4 py-2 bg-panel/20">
           <button
             onClick={toggleConsole}
             className="flex items-center gap-1 cursor-pointer px-2 text-text-secondary hover:bg-accent-hover/30 hover:text-text-primary rounded-sm"

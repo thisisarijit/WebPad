@@ -2,16 +2,11 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import htmlLogo from "../../public/html_logo.png";
 import cssLogo from "../../public/css_logo.png";
 import jsLogo from "../../public/js_logo.png";
+import { useProjectContext } from "../context/ProjectContext";
 
-const LeftSideBar = ({
-  onToggle,
-  files,
-  setFiles,
-  activeFileId,
-  setActiveFileId,
-  openFileIds,
-  setOpenFileIds,
-}) => {
+const LeftSideBar = ({ onToggle }) => {
+  const { files, activeFileId, setActiveFileId, setOpenFileIds } =
+    useProjectContext();
   const handleFileClick = (fileId) => {
     setActiveFileId(fileId);
 
@@ -39,20 +34,20 @@ const LeftSideBar = ({
             type="button"
             key={file.id}
             onClick={() => handleFileClick(file.id)}
-            className={`flex items-center gap-1 my-1 py-1 px-2 border-x border-b-2 hover:border-text-primary rounded-lg overflow-hidden ${file.id === activeFileId ? "bg-border" : ""}`}
+            className={`flex items-center gap-1 my-1 py-1 px-3 border-x border-b-2 hover:border-text-primary rounded-lg overflow-hidden ${file.id === activeFileId ? "bg-border text-accent border-accent-hover" : ""}`}
           >
             {file.language === "html" ? (
-              <img src={htmlLogo} className="h-4 w-4" />
+              <img src={htmlLogo} className="h-4 w-4 mt-1" />
             ) : (
               ""
             )}
             {file.language === "css" ? (
-              <img src={cssLogo} className="h-4 w-4" />
+              <img src={cssLogo} className="h-4 w-4 mt-1" />
             ) : (
               ""
             )}
             {file.language === "javascript" ? (
-              <img src={jsLogo} className="h-4 w-4" />
+              <img src={jsLogo} className="h-4 w-4 mt-1" />
             ) : (
               ""
             )}

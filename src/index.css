@@ -104,8 +104,8 @@
 
 @utility cosmic-button {
   @apply px-4 py-1 bg-accent text-text-primary font-medium
-    transition-all duration-300 rounded-sm cursor-pointer
-    hover:bg-accent-hover active:scale-95;
+    transition-all duration-300 rounded-md cursor-pointer
+    hover:bg-accent-hover active:scale-90;
 }
 
 .code-editor .cm-editor {
