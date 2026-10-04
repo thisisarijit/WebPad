@@ -1,10 +1,19 @@
-import { ArrowRight, Code, Code2, Eye, Handshake, Save } from "lucide-react";
+import {
+  ArrowRight,
+  Code,
+  Code2,
+  Eye,
+  Handshake,
+  Pencil,
+  Save,
+} from "lucide-react";
 import htmlLogo from "../../public/html_logo.png";
 import cssLogo from "../../public/css_logo.png";
 import jsLogo from "../../public/js_logo.png";
 import { Link } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
 import ThemeToggleButton from "../components/ui/ThemeToggleButton";
+import { motion } from "motion/react";
 
 const features = [
   {
@@ -36,20 +45,31 @@ const Home = () => {
   const { isDarkMode } = useThemeContext();
   return (
     <div className="flex flex-col min-h-screen text-text-primary bg-background px-15 py-5 items-center justify-center gap-1 md:gap-3 lg:gap-5">
-      <ThemeToggleButton />
-      <div className="flex flex-col gap-5 justify-center items-center">
+      <div className="flex items-center justify-between border-b w-full pb-2">
+        <Link
+          to="/"
+          className="flex text-xl md:text-2xl lg:text-3xl font-extrabold"
+        >
+          Web<span className="text-accent">Pad</span>
+        </Link>
+        <ThemeToggleButton />
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex flex-col gap-2 md:gap-4 justify-center items-center"
+      >
         <span className="border border-border rounded-full px-2 md:py-1 flex gap-2 text-xs md:text-sm lg:text-md items-center">
           {" "}
           <Code size={12} /> Code | Create | Learn
         </span>
-
         <h1 className="text-4xl text-center md:text-5xl lg:text-6xl pb-2 font-extrabold overflow-hidden">
           Your Web Development <span className="text-accent">Playground</span>
         </h1>
 
         <div className="flex gap-2 justify-center w-full text-xs md:text-sm lg:text-md text-text-secondary">
           <p className="mt-1.5">BUILT FOR</p>
-
           <span className="flex items-center justify-center gap-1">
             <img
               src={htmlLogo}
@@ -83,19 +103,36 @@ const Home = () => {
         >
           Start Coding Now <ArrowRight />
         </Link>
-      </div>
+      </motion.div>
 
       {/* Features */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 my-2">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.08,
+            },
+          },
+        }}
+        className="grid grid-cols-2 lg:grid-cols-4 gap-2 my-2"
+      >
         {features.map((feature) => {
           const Icon = feature.icon;
 
           return (
-            <div
+            <motion.div
               key={feature.name}
-              className="flex flex-col items-center bg-panel/20 border border-accent text-center p-2 md:p-4 rounded-lg"
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="flex flex-col items-center bg-panel border border-border text-center p-2 rounded-lg transition-colors hover:border-accent/40"
             >
-              <div className="border border-border mb-5 flex h-8 md:h-10 w-8 md:w-10 items-center justify-center rounded-lg bg-accent/10 text-green-300 transition-all duration-300">
+              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
                 <Icon size={19} />
               </div>
 
@@ -106,12 +143,11 @@ const Home = () => {
               <p className="text-text-secondary text-xs sm:text-sm md:text-md text-center">
                 {feature.details}
               </p>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
-
-      <footer className="mx-auto mt-4 w-full max-w-7xl border-t border-border pt-3 text-center text-xs text-text-secondary lg:text-sm">
+      </motion.div>
+      <footer className="mx-auto mt-1 w-full max-w-7xl border-t border-border pt-3 text-center text-xs text-text-secondary lg:text-sm">
         <span>&copy; {new Date().getFullYear()} | WebPad</span>
       </footer>
     </div>

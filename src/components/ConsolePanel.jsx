@@ -14,9 +14,7 @@ const ConsolePanel = ({ logs, onClear, toggleConsole }) => {
   return (
     <div className="h-full flex flex-col">
       <div className="bg-border flex items-center justify-between px-4 text-text-primary py-2">
-        <span
-          className="px-2 rounded-sm flex items-center gap-1 bg-background text-accent"
-        >
+        <span className="px-2 rounded-sm flex items-center gap-1 bg-background text-accent">
           <Terminal size={20} />
           Console
           <X
@@ -38,10 +36,13 @@ const ConsolePanel = ({ logs, onClear, toggleConsole }) => {
           </div>
         ) : (
           logs.map((log) => (
-            <div key={log.id}>
+            <div
+              key={log.id}
+              className={`font-jetBrains-mono flex justify-center gap-2 ${log.level === "warn" ? `text-yellow-400` :""} ${log.level === "error" ? `text-red-600` :""}`}
+            >
               {log.level === "warn" && "⚠ "}
               {log.level === "error" && "✕ "}
-              {log.message}
+              <div className="text-text-primary">{log.message}</div>
             </div>
           ))
         )}

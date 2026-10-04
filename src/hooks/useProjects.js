@@ -89,7 +89,7 @@ const useProjects = () => {
   const savedProjects = loadProjects();
 
   const initialProject =
-    savedProjects?.projects?.[0] ?? createProject("My First Project");
+    savedProjects?.projects?.[0] ?? createProject("Untitled");
 
   const [projects, setProjects] = useState(
     savedProjects?.projects ?? [initialProject],
