@@ -44,7 +44,7 @@ const features = [
 const Home = () => {
   const { isDarkMode } = useThemeContext();
   return (
-    <div className="flex flex-col min-h-screen text-text-primary bg-background px-15 py-5 items-center justify-center gap-1 md:gap-3 lg:gap-5">
+    <div className="flex flex-col min-h-screen text-text-primary bg-background px-8 py-5 items-center justify-center gap-1 md:gap-3 lg:gap-5">
       <div className="flex items-center justify-between border-b w-full pb-2">
         <Link
           to="/"

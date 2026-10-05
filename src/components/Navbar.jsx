@@ -50,7 +50,7 @@ const Navbar = ({ handleReset, handleDeleteRequest }) => {
     <nav className="w-full rounded-lg border-2 px-3 py-1 sm:px-5">
       <div className="flex w-full min-w-0 items-center justify-between gap-2">
         <Link
-          className="shrink-0 text-2xl font-extrabold text-accent md:text-3xl"
+          className="shrink-0 text-2xl md:text-3xl font-extrabold text-accent "
           to="/"
         >
           <span className="text-text-primary">Web</span>Pad
@@ -142,7 +142,7 @@ const Navbar = ({ handleReset, handleDeleteRequest }) => {
           <button
             type="button"
             onClick={handleReset}
-            className="cosmic-button flex items-center gap-1 border-2 border-accent bg-transparent text-accent transition-all duration-300 hover:bg-transparent"
+            className="cosmic-button flex items-center gap-1 px-1 sm:px-4 border-2 border-accent bg-transparent text-accent transition-all duration-300 hover:bg-transparent"
           >
             <RefreshCcw size={15} />
             <span className="hidden md:block">Reset</span>
@@ -150,7 +150,7 @@ const Navbar = ({ handleReset, handleDeleteRequest }) => {
           <button
             type="button"
             onClick={handleSave}
-            className="cosmic-button flex items-center gap-1 border-2 border-green-600 bg-green-600 text-white transition-all duration-300 hover:bg-green-400"
+            className="cosmic-button flex items-center gap-1 px-1 sm:px-4 border-2 border-green-600 bg-green-600 text-white transition-all duration-300 hover:bg-green-400"
           >
             <Save size={15} />
             <span className="hidden md:block">Save</span>

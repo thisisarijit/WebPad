@@ -47,7 +47,7 @@
 @layer base {
   :root {
     --background: 210, 20%, 97%;
-    --panel: 0, 0%, 100%;
+    --panel: 0, 0%, 70%;
     --border: 214, 18%, 88%;
 
     --text-primary: 222, 24%, 12%;
@@ -59,7 +59,7 @@
 
   .dark {
     --background: 222, 18%, 8%;
-    --panel: 222, 17%, 11%;
+    --panel: 222, 17%, 40%;
     --border: 216, 14%, 20%;
 
     --text-primary: 210, 20%, 94%;
