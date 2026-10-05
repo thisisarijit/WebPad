@@ -9,32 +9,22 @@ const CodeAndOutput = () => {
   const handlePointerDown = (event) => {
     event.currentTarget.setPointerCapture(event.pointerId);
   };
-
   const handlePointerMove = (event) => {
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
       return;
     }
 
     const container = containerRef.current;
-
-    if (!container) return;
-
     const rect = container.getBoundingClientRect();
-
-    const newWidth =
-      ((event.clientX - rect.left) / rect.width) * 100;
+    const newWidth = ((event.clientX - rect.left) / rect.width) * 100;
 
     const safeWidth = Math.min(70, Math.max(30, newWidth));
-
     setCodeWidth(safeWidth);
   };
 
   const handlePointerUp = (event) => {
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
+    event.currentTarget.releasePointerCapture(event.pointerId);
   };
-
   const handlePointerCancel = (event) => {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -44,13 +34,14 @@ const CodeAndOutput = () => {
   return (
     <section
       ref={containerRef}
-      className="grid h-full min-h-0 min-w-0 w-full overflow-hidden rounded-lg"
+      className="flex flex-col sm:grid h-full min-h-0 min-w-0 rounded-lg overflow-hidden"
       style={{
-        gridTemplateColumns: `${codeWidth}% 8px minmax(0, 1fr)`,
+        gridTemplateColumns: `${codeWidth}% 6px minmax(0, 1fr)`,
       }}
     >
       {/* CODE */}
-      <div className="min-h-0 min-w-0 overflow-hidden rounded-lg border-2 border-border">
+      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
+        {" "}
         <CodeSection />
       </div>
 
@@ -60,13 +51,13 @@ const CodeAndOutput = () => {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
-        className="group relative z-10 flex h-full w-2 cursor-col-resize touch-none items-center justify-center"
+        className="group relative cursor-col-resize touch-none flex items-center justify-center"
       >
-        <div className="h-full w-1 rounded-lg bg-panel transition-colors group-hover:bg-text-primary" />
+        <div className="hidden sm:block sm:h-full sm:w-1 bg-accent/50 group-hover:bg-text-primary rounded-lg" />
       </div>
 
       {/* OUTPUT */}
-      <div className="min-h-0 min-w-0 overflow-hidden rounded-lg border-2 border-border">
+      <div className="h-full min-h-0 min-w-0 overflow-hidden border-2 rounded-lg">
         <LivePreview />
       </div>
     </section>

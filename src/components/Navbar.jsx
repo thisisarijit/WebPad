@@ -50,7 +50,7 @@ const Navbar = ({ handleReset, handleDeleteRequest }) => {
     <nav className="w-full rounded-lg border-2 px-3 py-1 sm:px-5">
       <div className="flex w-full min-w-0 items-center justify-between gap-2">
         <Link
-          className="shrink-0 text-2xl md:text-3xl font-extrabold text-accent "
+          className="shrink-0 text-xl sm:text-2xl md:text-3xl font-extrabold text-accent "
           to="/"
         >
           <span className="text-text-primary">Web</span>Pad
